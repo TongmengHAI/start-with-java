@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class HelloController {
+public class NotFoundController {
 
-    @GetMapping("/hello")
+    @GetMapping("/notFound")
     public String hello() {
-        return "Hello from Spring Boot with JDK 21!";
+        return "page not Found From Spring Boot!".toString();
     }
 }
