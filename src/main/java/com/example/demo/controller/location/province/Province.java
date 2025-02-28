@@ -1,15 +1,22 @@
-package com.example.demo.controller.location;
+package com.example.demo.controller.location.province;
 
 import java.sql.Timestamp;
+import java.util.List;
+
+import com.example.demo.controller.location.commune.Commune;
+import com.example.demo.controller.location.district.District;
+import com.example.demo.controller.location.village.Village;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Table(name = "provinces")
 @Entity
 @Data  // Includes @Getter, @Setter, @ToString, @EqualsAndHashCode
 @NoArgsConstructor  // Generates a no-args constructor
 @AllArgsConstructor // Generates an all-args constructor
-public class ProvinceEntity {
+public class Province {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,7 +36,19 @@ public class ProvinceEntity {
     @Column(name = "khmer_name")
     private String khmer_name;
 
-    private Timestamp created_at = null;
-    private Timestamp updated_at = null;
+    @CreatedDate
+    @Column(name = "created_at", updatable = false)
+    private Timestamp created_at;
+
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private Timestamp updated_at;
+
+
+//    @OneToMany
+//    private List<District> districts;
+
+
+
 
 }

@@ -1,5 +1,8 @@
-package com.example.demo.controller.location;
+package com.example.demo.controller.location.province;
 
+import com.example.demo.controller.location.district.District;
+import com.example.demo.controller.location.district.DistrictService;
+import com.example.demo.controller.location.province.dto.ProvinceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +15,13 @@ public class ProvinceController {
 
     @Autowired
     private ProviceService provinceService;
+    @Autowired
+    private DistrictService districtService;
+
 
 
     @GetMapping("/provinces/test")
-    public List<ProvinceResponse> getProvinces() {
+    public List<ProvinceResponse1> getProvinces() {
 //        List<ProvinceEntity> provinces = provinceRepository.findAll();
 //        ProvinceEntity province = provinceRepository.findByName("Kandal");
 //
@@ -45,13 +51,13 @@ public class ProvinceController {
 //            System.out.println(p.getId());
 //        }
 
-        Optional<ProvinceEntity> province = provinceService.getProvinceById(1L);
+        Optional<Province> province = provinceService.getProvinceById(1L);
 
-        List<ProvinceResponse> provinceResponses = province.isPresent()
-                ? List.of(ProvinceResponse.builder()
-                        .id(province.get().getId())
-                        .name(province.get().getName())
-                        .build())
+        List<ProvinceResponse1> provinceResponses1 = province.isPresent()
+                ? List.of(ProvinceResponse1.builder()
+                .id(province.get().getId())
+                .name(province.get().getName())
+                .build())
                 : List.of();
 
 
@@ -63,21 +69,39 @@ public class ProvinceController {
 //
 //        }
 
-        provinceService.updateUser(35L, "Banteay ");
+//        provinceService.updateUser(35L, "Banteay ");
 
-        return provinceResponses;
+        return provinceResponses1;
     }
 
     @GetMapping("/provinces")
-    public List<ProvinceResponse> getProvinces2() {
+    public List<ProvinceResponse1> getProvinces2() {
         return provinceService.getAllProvinces();
     }
 
-    @PostMapping("/provinces/{id}/update")
-    public ProvinceResponse updateProvince(@PathVariable Long id, ProvinceEntity provinceEntity) {
 
 
-        return null;
+    //    province with districts
+    @GetMapping("/province/{id}")
+    public ProvinceResponse getProvinceWithDistricts(@PathVariable Long id) {
+        Province province = provinceService.getProvinceById(id).orElseThrow(() -> new RuntimeException("Province not found"));
+
+        List<District> districts = districtService.getDistrict(province.getId());
+
+
+        ProvinceResponse provinceResponse = new ProvinceResponse(
+                province.getId(),
+                province.getType(),
+                province.getKhmer_type(),
+                province.getCode(),
+                province.getName(),
+                province.getKhmer_name(),
+
+                districts
+        );
+        return provinceResponse;
     }
+
+
 
 }

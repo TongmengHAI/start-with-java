@@ -1,4 +1,4 @@
-package com.example.demo.controller.location;
+package com.example.demo.controller.location.province;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,20 +14,21 @@ public class ProviceService {
     @Autowired
     private ProvinceRepository provinceRepository;
 
-    public Optional<ProvinceEntity> getProvinceById(Long id) {
+
+    public Optional<Province> getProvinceById(Long id) {
 
         return provinceRepository.findById(id);
     }
 
-    public ProvinceEntity saveProvince(ProvinceEntity provinceEntity) {
+    public Province saveProvince(Province provinceEntity) {
         return provinceRepository.save(provinceEntity);
     }
 
-    public List<ProvinceResponse> getAllProvinces() {
-        List<ProvinceEntity> provinces = provinceRepository.findAll();
+    public List<ProvinceResponse1> getAllProvinces() {
+        List<Province> provinces = provinceRepository.findAll();
         if (provinces != null) {
             return provinces.stream().map(
-                    item -> ProvinceResponse.builder()
+                    item -> ProvinceResponse1.builder()
                             .id(item.getId())
                             .name(item.getName())
                             .build()
@@ -45,7 +46,7 @@ public class ProviceService {
 
     @Transactional
     public void createOrUpdate(Long id) {
-        ProvinceEntity province = provinceRepository.findById(id).isEmpty() ? new ProvinceEntity() : provinceRepository.findById(id).get();
+//        Province province = provinceRepository.findById(id).isEmpty() ? new Province() : provinceRepository.findById(id).get();
 //        province.setName(newName);
 //        province.setCode("1");
 //        province.setType("province");
@@ -54,9 +55,11 @@ public class ProviceService {
 //
 //        provinceRepository.save(province);
 
-        System.out.println(province);
+//        System.out.println(province);
 
     }
+
+
 
 
 }
