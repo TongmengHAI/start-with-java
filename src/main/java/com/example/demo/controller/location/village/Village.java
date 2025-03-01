@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.beans.ConstructorProperties;
 import java.sql.Timestamp;
 
 @Entity
@@ -62,6 +63,16 @@ public class Village {
     private Timestamp updated_at;
 
 
+    // 👇 Custom constructor for stored procedure mapping
+    @ConstructorProperties({"id", "type", "khmer_type", "name", "khmer_name", "code"})
+    public Village(Long id, String type, String khmer_type, String name, String khmer_name, String code) {
+        this.id = id;
+        this.type = type;
+        this.khmer_type = khmer_type;
+        this.name = name;
+        this.khmer_name = khmer_name;
+        this.code = code;
+    }
 
 
 

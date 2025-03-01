@@ -5,12 +5,14 @@ import com.example.demo.controller.location.district.District;
 import com.example.demo.controller.location.district.dto.DistrictWithCommunesResponse;
 import com.example.demo.controller.location.village.Village;
 import com.example.demo.controller.location.village.VillageService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -21,13 +23,14 @@ public class CommuneController {
 
     @Autowired
     private CommuneService communeService;
-
+    @Autowired
+    private CommuneRepository communeRepository;
 
     @GetMapping("/commune/{id}/villages")
     public CommuneWithVillagesRespose getCommunesByDistrict(@PathVariable Long id) {
         Commune commune = communeService.getCommuneById(id);
 
-        List<Village> villages = villageService.getVillagesByCommuneId(commune.getId());
+        List<Village> villages = communeService.getCommuneWithVillages(id);  // get data by call store procedure process
 
         CommuneWithVillagesRespose districtWithCommunesResponse = new CommuneWithVillagesRespose(
                 commune.getId(),
