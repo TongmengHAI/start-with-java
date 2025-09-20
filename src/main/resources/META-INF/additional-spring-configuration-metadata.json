@@ -1,0 +1,53 @@
+{
+  "properties": [
+    {
+      "name": "spring.application.name",
+      "type": "java.lang.String",
+      "description": "Description for spring.application.name."
+    },
+    {
+      "name": "server.port",
+      "type": "java.lang.String",
+      "description": "Description for server.port."
+    },
+    {
+      "name": "spring.data.redis.host",
+      "type": "java.lang.String",
+      "description": "Description for spring.data.redis.host."
+    },
+    {
+      "name": "spring.data.redis.port",
+      "type": "java.lang.String",
+      "description": "Description for spring.data.redis.port."
+    },
+    {
+      "name": "spring.data.redis.timeout",
+      "type": "java.lang.String",
+      "description": "Description for spring.data.redis.timeout."
+    },
+    {
+      "name": "ratelimit.enabled",
+      "type": "java.lang.String",
+      "description": "Description for ratelimit.enabled."
+    },
+    {
+      "name": "ratelimit.limit",
+      "type": "java.lang.String",
+      "description": "Description for ratelimit.limit."
+    },
+    {
+      "name": "ratelimit.window-seconds",
+      "type": "java.lang.String",
+      "description": "Description for ratelimit.window-seconds."
+    },
+    {
+      "name": "ratelimit.bucket-name",
+      "type": "java.lang.String",
+      "description": "Description for ratelimit.bucket-name."
+    },
+    {
+      "name": "logging.level.org.springframework.data.redis",
+      "type": "java.lang.String",
+      "description": "Description for logging.level.org.springframework.data.redis."
+    }
+  ] }
