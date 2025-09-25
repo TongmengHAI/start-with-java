@@ -73,6 +73,10 @@ ratelimit.bucket-name=api
 ```bash
   curl -i http://localhost:8082/api/data
 ```
+Or run script `loop_req.sh` with Git Bash or Linux terminal:
+```bash
+  loop_req.sh
+```
 - You should see the rate limit headers in the response.
 - After exceeding the limit, you will receive a `429 Too Many Requests` response.
 - Example response headers:
